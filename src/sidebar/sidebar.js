@@ -63,7 +63,7 @@ class Sidebar extends React.Component {
                         onClick={this.newBtnClick}
                         className={classes.newNoteBtn}
                     >
-                        {this.state.addingNote ? 'Cancel' : 'New Note'}
+                        {this.state.addingNote ? 'Cancel' : 'New Diary Entry'}
                     </Button>
                     {
                         this.state.addingNote ?
@@ -85,7 +85,7 @@ class Sidebar extends React.Component {
                                     className={classes.newNoteSubmitBtn}
                                     onClick={this.newNote}
                                 >
-                                    Create Note
+                                    Create Diary Entry
                                 </Button>
                             </div>
                         :

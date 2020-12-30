@@ -45,11 +45,6 @@ class Editor extends React.Component {
         })
     }, 1500);
 
-    updateBody = async (val) => {
-        await this.setState({ text: val });
-        this.update();
-    }
-
     updateTitle = async (txt) => {
         await this.setState({ title: txt });
         this.update();
@@ -64,7 +59,7 @@ class Editor extends React.Component {
                 <input
                     className={classes.titleInput}
                     placeholder='Note title...'
-                    value={this.state.title ? this.state.title : ''}
+                    value={this.state.title ? this.state.title: ''}
                     onChange={(e) => this.updateTitle(e.target.value)}
                 >
                 </input>

@@ -44,10 +44,11 @@ class App extends React.Component {
       });
   }
 
-  newNote = async (title) => {
+  newNote = async (title, date) => {
     const note = {
       title: title,
-      body: ''
+      body: '',
+      date: date
     };
     const newFromDB = await firebase
       .firestore()
@@ -55,12 +56,12 @@ class App extends React.Component {
       .add({
         title: note.title,
         body: note.body,
+        date: note.date,
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
       });
     const newID = newFromDB.id;
     await this.setState({ notes: [...this.state.notes, note] });
-    const newNoteIndex = this.state.notes.indexOf(this.state.notes.filter(note => note.id === newID)[0]);
-    this.setState({ selectedNote: this.state.notes[newNoteIndex], selectedNoteIndex: newNoteIndex });
+    this.setState({ selectedNote: note, selectedNoteIndex: this.state.notes.indexOf(note) });
   }
 
   deleteNote = async (note) => {
@@ -82,6 +83,7 @@ class App extends React.Component {
   }
 
   render() {
+
     return (
       <div className="App">
         <Sidebar 
@@ -94,10 +96,12 @@ class App extends React.Component {
         </Sidebar>
         {
           this.state.selectedNote ?
-            <Editor selectedNote={this.state.selectedNote}
-            selectedNoteIndex={this.state.selectedNoteIndex}
-            notes={this.state.notes}
-            noteUpdate={this.noteUpdate}></Editor> 
+            <Editor 
+              selectedNote={this.state.selectedNote}
+              selectedNoteIndex={this.state.selectedNoteIndex}
+              notes={this.state.notes}
+              noteUpdate={this.noteUpdate}>  
+            </Editor> 
           :
             null
         }

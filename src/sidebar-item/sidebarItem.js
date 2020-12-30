@@ -4,7 +4,7 @@ import styles from './styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { removeHTMLTags } from '../helpers';
+
 
 class SidebarItem extends React.Component {
     selectNote = (n, i) => this.props.selectNote(n, i);
@@ -31,14 +31,14 @@ class SidebarItem extends React.Component {
                     >
                         <ListItemText
                             primary={note.title}
-                            secondary={removeHTMLTags(note.body.substring(0, 30)) + '...'}
+                            secondary={new Date(note.date.toDate()).toDateString()}
                         >
                         </ListItemText>
                     </div>
-                <DeleteIcon 
-                    className={classes.deleteIcon}
-                    onClick={() => this.deleteNote(note)}    
-                ></DeleteIcon>
+                    <DeleteIcon 
+                        className={classes.deleteIcon}
+                        onClick={() => this.deleteNote(note)}    
+                    ></DeleteIcon>
                 </ListItem>
             </div>
         )
